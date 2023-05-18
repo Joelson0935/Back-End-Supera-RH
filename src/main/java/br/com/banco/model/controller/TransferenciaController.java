@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.banco.model.Transferencia;
+import br.com.banco.model.Dto.RequestTransferencia;
 import br.com.banco.model.service.TransferenciaService;
 
 @RestController
@@ -28,62 +28,44 @@ public class TransferenciaController {
 	private TransferenciaService transferenciaService;
 
 	@PostMapping("/Salvar")
-	public ResponseEntity<Transferencia> salvar(@RequestBody Transferencia transferencia) {
-		Transferencia t = transferenciaService.salvar(transferencia);
-		return new ResponseEntity<Transferencia>(t, HttpStatus.CREATED);
+	public ResponseEntity<RequestTransferencia> salvar(@RequestBody RequestTransferencia request) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(transferenciaService.guardarDados(request));
 	}
 
 	@PutMapping("/Atualizar")
-	public ResponseEntity<Transferencia> atualizar(@RequestParam(name = "id") Long id,
-			@RequestBody Transferencia transferencia) {
-		Transferencia t = transferenciaService.buscarPorId(id);
-		if (t == null) {
-			return ResponseEntity.notFound().build();
-		}
-		transferenciaService.atualizar(id, transferencia);
-		return new ResponseEntity<Transferencia>(transferencia, HttpStatus.OK);
+	public ResponseEntity<RequestTransferencia> atualizar(@RequestParam(name = "id") Long id,
+			@RequestBody RequestTransferencia request) {
+		return ResponseEntity.ok(transferenciaService.atualizarDados(id, request));
 	}
 
 	@GetMapping("/BuscarPorId")
-	public ResponseEntity<Transferencia> buscarPorId(@RequestParam(name = "id") Long id) {
-		Transferencia transferencia = transferenciaService.buscarPorId(id);
-		if (transferencia == null) {
-			return ResponseEntity.notFound().build();
-		}
-		return new ResponseEntity<Transferencia>(transferencia, HttpStatus.OK);
+	public ResponseEntity<RequestTransferencia> buscarPorId(@RequestParam(name = "id") Long id) {
+		return ResponseEntity.ok(transferenciaService.buscarDadosPorId(id));
 	}
 
 	@GetMapping("/BuscarTodos")
-	public ResponseEntity<List<Transferencia>> buscarTodos() {
-		List<Transferencia> transferencia = transferenciaService.buscarTodos();
-		return ResponseEntity.ok(transferencia);
+	public ResponseEntity<List<RequestTransferencia>> buscarTodos() {
+		return ResponseEntity.ok(transferenciaService.buscarTodos());
 	}
 
 	@GetMapping("/BuscarPorNome")
-	public ResponseEntity<List<Transferencia>> buscarPorNome(@RequestParam(name = "nome") String nome) {
-		List<Transferencia> transferencia = transferenciaService.buscarPorNome(nome);
-		return ResponseEntity.ok(transferencia);
+	public ResponseEntity<List<RequestTransferencia>> buscarPorNome(@RequestParam(name = "nome") String nome) {
+		return ResponseEntity.ok(transferenciaService.buscarPorNome(nome));
 	}
 
 	@GetMapping("/BuscarPorData")
-	public ResponseEntity<List<Transferencia>> buscarPorData(@RequestParam(name = "data") String data) {
-		List<Transferencia> transferencia = transferenciaService.buscarPorData(data);
-		return ResponseEntity.ok(transferencia);
+	public ResponseEntity<List<RequestTransferencia>> buscarPorData(@RequestParam(name = "data") String data) {
+		return ResponseEntity.ok(transferenciaService.buscarPorData(data));
 	}
 
 	@GetMapping("/BuscarPorDataOuNome")
-	public ResponseEntity<List<Transferencia>> buscarPorDataOuNome(@Param(value = "data") String data,
+	public ResponseEntity<List<RequestTransferencia>> buscarPorDataOuNome(@Param(value = "data") String data,
 			@Param(value = "nome") String nome) {
-		List<Transferencia> transferencia = transferenciaService.buscarPorDataOuNome(data, nome);
-		return ResponseEntity.ok(transferencia);
+		return ResponseEntity.ok(transferenciaService.buscarPorDataOuNome(data, nome));
 	}
 
 	@DeleteMapping("/Deletar")
 	public ResponseEntity<Void> deletar(@RequestParam(name = "id") Long id) {
-		Transferencia transferencia = transferenciaService.buscarPorId(id);
-		if (transferencia == null) {
-			return ResponseEntity.notFound().build();
-		}
 		transferenciaService.deletar(id);
 		return ResponseEntity.noContent().build();
 	}
