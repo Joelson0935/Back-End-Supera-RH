@@ -1,6 +1,8 @@
-package br.com.banco.model.controller;
+package br.com.banco.controller;
 
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.banco.model.Dto.RequestConta;
-import br.com.banco.model.service.ContaService;
+import br.com.banco.service.ContaService;
 
 @RestController
 @RequestMapping("/Contas")
@@ -27,12 +29,12 @@ public class ContaController {
 	private ContaService contaService;
 
 	@PostMapping("/Salvar")
-	public ResponseEntity<String> guardarDados(@RequestBody RequestConta request) {
+	public ResponseEntity<String> guardarDados(@Valid @RequestBody RequestConta request) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(contaService.guardarDados(request));
 	}
 
 	@PutMapping("/Atualizar")
-	public ResponseEntity<RequestConta> atualizarDados(@RequestParam(name = "id") Long id,
+	public ResponseEntity<RequestConta> atualizarDados(@Valid @RequestParam(name = "id") Long id,
 			@RequestBody RequestConta request) {
 		return ResponseEntity.ok(contaService.atualizarDados(id, request));
 	}

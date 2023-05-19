@@ -35,19 +35,19 @@ public class Conta implements Serializable {
 	private List<Transferencia> transferencias = new ArrayList<Transferencia>();
 
 	@Column(length = 10, scale = 2)
-	private BigDecimal saldo;
+	private BigDecimal saldo = BigDecimal.ZERO;
 
 	public Conta(String nomeResponsavel, BigDecimal saldo) {
 		super();
 		this.nomeResponsavel = nomeResponsavel;
-		this.saldo = BigDecimal.ZERO;
+		this.saldo = saldo;
 	}
 
 	public Conta(Long id, String nomeResponsavel, BigDecimal saldo) {
 		super();
 		this.id = id;
 		this.nomeResponsavel = nomeResponsavel;
-		this.saldo = BigDecimal.ZERO;
+		this.saldo = saldo;
 	}
 
 }

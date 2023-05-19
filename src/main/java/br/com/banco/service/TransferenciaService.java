@@ -1,4 +1,4 @@
-package br.com.banco.model.service;
+package br.com.banco.service;
 
 import java.util.List;
 

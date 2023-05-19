@@ -1,6 +1,8 @@
-package br.com.banco.model.controller;
+package br.com.banco.controller;
 
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.banco.model.Dto.RequestTransferencia;
-import br.com.banco.model.service.TransferenciaService;
+import br.com.banco.service.TransferenciaService;
 
 @RestController
 @RequestMapping("/Transferencias")
@@ -28,12 +30,12 @@ public class TransferenciaController {
 	private TransferenciaService transferenciaService;
 
 	@PostMapping("/Salvar")
-	public ResponseEntity<RequestTransferencia> salvar(@RequestBody RequestTransferencia request) {
+	public ResponseEntity<RequestTransferencia> salvar(@Valid @RequestBody RequestTransferencia request) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(transferenciaService.guardarDados(request));
 	}
 
 	@PutMapping("/Atualizar")
-	public ResponseEntity<RequestTransferencia> atualizar(@RequestParam(name = "id") Long id,
+	public ResponseEntity<RequestTransferencia> atualizar(@Valid @RequestParam(name = "id") Long id,
 			@RequestBody RequestTransferencia request) {
 		return ResponseEntity.ok(transferenciaService.atualizarDados(id, request));
 	}

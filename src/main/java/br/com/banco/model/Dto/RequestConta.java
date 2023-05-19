@@ -3,6 +3,9 @@ package br.com.banco.model.Dto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +18,7 @@ public class RequestConta implements Serializable {
 
 	private Long id;
 	private String nomeResponsavel;
-	private BigDecimal saldo;
+	@JsonFormat(shape = Shape.STRING)
+	private BigDecimal saldo = BigDecimal.ZERO;
 
 }

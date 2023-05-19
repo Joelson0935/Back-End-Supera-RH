@@ -1,4 +1,4 @@
-package br.com.banco.model.service.impl;
+package br.com.banco.service.impl;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import br.com.banco.exceptions.ObjectNotFound;
 import br.com.banco.model.Conta;
 import br.com.banco.model.Dto.RequestConta;
-import br.com.banco.model.repository.ContaRepository;
-import br.com.banco.model.service.ContaService;
+import br.com.banco.repository.ContaRepository;
+import br.com.banco.service.ContaService;
 
 @Service
 public class ContaServiceImpl implements ContaService {

@@ -1,4 +1,4 @@
-package br.com.banco.model.service.impl;
+package br.com.banco.service.impl;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -13,9 +13,9 @@ import br.com.banco.exceptions.ObjectNotFound;
 import br.com.banco.model.Conta;
 import br.com.banco.model.Transferencia;
 import br.com.banco.model.Dto.RequestTransferencia;
-import br.com.banco.model.repository.ContaRepository;
-import br.com.banco.model.repository.TransferenciaRepository;
-import br.com.banco.model.service.TransferenciaService;
+import br.com.banco.repository.ContaRepository;
+import br.com.banco.repository.TransferenciaRepository;
+import br.com.banco.service.TransferenciaService;
 
 @Service
 public class TransferenciaServiceImpl implements TransferenciaService {

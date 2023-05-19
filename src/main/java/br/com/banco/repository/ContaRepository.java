@@ -1,4 +1,4 @@
-package br.com.banco.model.repository;
+package br.com.banco.repository;
 
 import java.util.List;
 

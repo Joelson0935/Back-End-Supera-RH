@@ -2,7 +2,7 @@ package br.com.banco.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -27,8 +26,7 @@ public class Transferencia implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime dataTransferencia;
+	private LocalDate dataTransferencia;
 
 	@Column(length = 20, scale = 2)
 	private BigDecimal valor;
@@ -45,7 +43,7 @@ public class Transferencia implements Serializable {
 		super();
 	}
 
-	public Transferencia(Long id, LocalDateTime dataTransferencia, BigDecimal valor, String tipo,
+	public Transferencia(Long id, LocalDate dataTransferencia, BigDecimal valor, String tipo,
 			String nomeOperadorTransacao, Conta conta) {
 		super();
 		this.id = id;
@@ -56,7 +54,7 @@ public class Transferencia implements Serializable {
 		this.conta = conta;
 	}
 
-	public Transferencia(LocalDateTime dataTransferencia, BigDecimal valor, String tipo, String nomeOperadorTransacao,
+	public Transferencia(LocalDate dataTransferencia, BigDecimal valor, String tipo, String nomeOperadorTransacao,
 			Conta conta) {
 		super();
 		this.dataTransferencia = dataTransferencia;
